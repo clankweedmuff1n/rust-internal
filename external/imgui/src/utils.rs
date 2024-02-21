@@ -12,11 +12,11 @@ bitflags! {
     /// Item hover check option flags
     #[repr(transparent)]
     pub struct ItemHoveredFlags: u32 {
-        /// Return true even if a popup window is blocking access to this item
+        /// Return true even if a popup WINDOW is blocking access to this item
         const ALLOW_WHEN_BLOCKED_BY_POPUP = sys::ImGuiHoveredFlags_AllowWhenBlockedByPopup;
         /// Return true even if an active item is blocking access to this item
         const ALLOW_WHEN_BLOCKED_BY_ACTIVE_ITEM = sys::ImGuiHoveredFlags_AllowWhenBlockedByActiveItem;
-        /// Return true even if the position is obstructed or overlapped by another window
+        /// Return true even if the position is obstructed or overlapped by another WINDOW
         const ALLOW_WHEN_OVERLAPPED = sys::ImGuiHoveredFlags_AllowWhenOverlapped;
         /// Return true even if the item is disabled
         const ALLOW_WHEN_DISABLED = sys::ImGuiHoveredFlags_AllowWhenDisabled;
@@ -88,7 +88,7 @@ impl Ui {
     pub fn is_item_deactivated_after_edit(&self) -> bool {
         unsafe { sys::igIsItemDeactivatedAfterEdit() }
     }
-    /// Returns `true` if the last item open state was toggled
+    /// Returns `true` if the last item OPEN state was toggled
     #[doc(alias = "IsItemToggledOpen")]
     pub fn is_item_toggled_open(&self) -> bool {
         unsafe { sys::igIsItemToggledOpen() }
@@ -136,7 +136,7 @@ impl Ui {
     pub fn set_item_allow_overlap(&self) {
         unsafe { sys::igSetItemAllowOverlap() };
     }
-    /// Makes the last item the default focused item of the window
+    /// Makes the last item the default focused item of the WINDOW
     #[doc(alias = "SetItemDefaultFocus")]
     pub fn set_item_default_focus(&self) {
         unsafe { sys::igSetItemDefaultFocus() };

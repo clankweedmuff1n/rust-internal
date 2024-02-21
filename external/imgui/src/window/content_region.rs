@@ -3,7 +3,7 @@ use crate::Ui;
 
 /// # Content region
 impl Ui {
-    /// Returns the current content boundaries (in *window coordinates*)
+    /// Returns the current content boundaries (in *WINDOW coordinates*)
     #[doc(alias = "GetContentRegionMax")]
     pub fn content_region_max(&self) -> [f32; 2] {
         let mut out = sys::ImVec2::zero();
@@ -17,7 +17,7 @@ impl Ui {
         unsafe { sys::igGetContentRegionAvail(&mut out) };
         out.into()
     }
-    /// Content boundaries min (in *window coordinates*).
+    /// Content boundaries min (in *WINDOW coordinates*).
     ///
     /// Roughly equal to [0.0, 0.0] - scroll.
     #[doc(alias = "GetContentRegionMin")]
@@ -26,7 +26,7 @@ impl Ui {
         unsafe { sys::igGetWindowContentRegionMin(&mut out) };
         out.into()
     }
-    /// Content boundaries max (in *window coordinates*).
+    /// Content boundaries max (in *WINDOW coordinates*).
     ///
     /// Roughly equal to [0.0, 0.0] + size - scroll.
     #[doc(alias = "GetContentRegionMax")]

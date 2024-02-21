@@ -5,7 +5,7 @@ use crate::window::WindowFlags;
 use crate::Ui;
 use crate::{sys, Id};
 
-/// Builder for a child window
+/// Builder for a child WINDOW
 #[derive(Copy, Clone, Debug)]
 #[must_use]
 pub struct ChildWindow<'ui> {
@@ -20,7 +20,7 @@ pub struct ChildWindow<'ui> {
 }
 
 impl<'ui> ChildWindow<'ui> {
-    /// Creates a new child window builder with the str.
+    /// Creates a new child WINDOW builder with the str.
     #[doc(alias = "BeginChildID")]
     #[deprecated(since = "0.9.0", note = "use ui.child_window(...) instead")]
     pub fn new(ui: &'ui Ui, name: impl AsRef<str>) -> Self {
@@ -28,7 +28,7 @@ impl<'ui> ChildWindow<'ui> {
         Self::new_id(ui, id)
     }
 
-    /// Creates a new child window builder with the given imgui id.
+    /// Creates a new child WINDOW builder with the given imgui id.
     #[doc(alias = "BeginChildID")]
     pub fn new_id(ui: &'ui Ui, id: Id) -> Self {
         Self {
@@ -43,27 +43,27 @@ impl<'ui> ChildWindow<'ui> {
         }
     }
 
-    /// Replace current window flags with the given value
+    /// Replace current WINDOW flags with the given value
     #[inline]
     pub fn flags(mut self, flags: WindowFlags) -> Self {
         self.flags = flags;
         self
     }
-    /// Sets the child window size.
+    /// Sets the child WINDOW size.
     ///
     /// For each independent axis of size:
     ///
     /// - `> 0.0`: fixed size
-    /// - `= 0.0`: use remaining host window size
-    /// - `< 0.0`: use remaining host window size minus abs(size)
+    /// - `= 0.0`: use remaining host WINDOW size
+    /// - `< 0.0`: use remaining host WINDOW size minus abs(size)
     #[inline]
     pub fn size(mut self, size: impl Into<MintVec2>) -> Self {
         self.size = size.into().into();
         self
     }
-    /// Sets the window content size, which can be used to enforce scrollbars.
+    /// Sets the WINDOW content size, which can be used to enforce scrollbars.
     ///
-    /// Does not include window decorations (title bar, menu bar, etc.). Set one of the values to
+    /// Does not include WINDOW decorations (title bar, menu bar, etc.). Set one of the values to
     /// 0.0 to leave the size automatic.
     #[inline]
     #[doc(alias = "SetNextWindowContentSize")]
@@ -71,7 +71,7 @@ impl<'ui> ChildWindow<'ui> {
         self.content_size = size.into().into();
         self
     }
-    /// Sets the window focused state, which can be used to bring the window to front
+    /// Sets the WINDOW focused state, which can be used to bring the WINDOW to front
     #[inline]
     #[doc(alias = "SetNextWindwowFocus")]
     pub fn focused(mut self, focused: bool) -> Self {
@@ -87,7 +87,7 @@ impl<'ui> ChildWindow<'ui> {
         self.bg_alpha = bg_alpha;
         self
     }
-    /// Enables/disables the child window border.
+    /// Enables/disables the child WINDOW border.
     ///
     /// Disabled by default.
     #[inline]
@@ -95,7 +95,7 @@ impl<'ui> ChildWindow<'ui> {
         self.border = border;
         self
     }
-    /// Enables/disables moving the window when child window is dragged.
+    /// Enables/disables moving the WINDOW when child WINDOW is dragged.
     ///
     /// Enabled by default.
     #[inline]
@@ -122,7 +122,7 @@ impl<'ui> ChildWindow<'ui> {
         self.flags.set(WindowFlags::NO_SCROLL_WITH_MOUSE, !value);
         self
     }
-    /// Enables/disables resizing the window to its content on every frame.
+    /// Enables/disables resizing the WINDOW to its content on every frame.
     ///
     /// Disabled by default.
     #[inline]
@@ -171,7 +171,7 @@ impl<'ui> ChildWindow<'ui> {
         self.flags.set(WindowFlags::NO_FOCUS_ON_APPEARING, !value);
         self
     }
-    /// Enables/disables bringing the window to front when taking focus (e.g. clicking it or
+    /// Enables/disables bringing the WINDOW to front when taking focus (e.g. clicking it or
     /// programmatically giving it focus).
     ///
     /// Enabled by default.
@@ -208,7 +208,7 @@ impl<'ui> ChildWindow<'ui> {
             .set(WindowFlags::ALWAYS_USE_WINDOW_PADDING, value);
         self
     }
-    /// Enables/disables gamepad/keyboard navigation within the window.
+    /// Enables/disables gamepad/keyboard navigation within the WINDOW.
     ///
     /// Enabled by default.
     #[inline]
@@ -216,7 +216,7 @@ impl<'ui> ChildWindow<'ui> {
         self.flags.set(WindowFlags::NO_NAV_INPUTS, !value);
         self
     }
-    /// Enables/disables focusing toward this window with gamepad/keyboard navigation (e.g.
+    /// Enables/disables focusing toward this WINDOW with gamepad/keyboard navigation (e.g.
     /// CTRL+TAB).
     ///
     /// Enabled by default.
@@ -250,12 +250,12 @@ impl<'ui> ChildWindow<'ui> {
         self.flags |= WindowFlags::NO_INPUTS;
         self
     }
-    /// Creates a child window and starts append to it.
+    /// Creates a child WINDOW and starts append to it.
     ///
-    /// Returns `Some(ChildWindowToken)` if the window is visible. After content has been
+    /// Returns `Some(ChildWindowToken)` if the WINDOW is visible. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the window is not visible and no content should be rendered.
+    /// Returns `None` if the WINDOW is not visible and no content should be rendered.
     pub fn begin(self) -> Option<ChildWindowToken<'ui>> {
         if self.content_size[0] != 0.0 || self.content_size[1] != 0.0 {
             unsafe { sys::igSetNextWindowContentSize(self.content_size.into()) };
@@ -281,10 +281,10 @@ impl<'ui> ChildWindow<'ui> {
             None
         }
     }
-    /// Creates a child window and runs a closure to construct the contents.
+    /// Creates a child WINDOW and runs a closure to construct the contents.
     /// Returns the result of the closure, if it is called.
     ///
-    /// Note: the closure is not called if no window content is visible (e.g. window is collapsed
+    /// Note: the closure is not called if no WINDOW content is visible (e.g. WINDOW is collapsed
     /// or fully clipped).
     pub fn build<T, F: FnOnce() -> T>(self, f: F) -> Option<T> {
         self.begin().map(|_window| f())
@@ -292,10 +292,10 @@ impl<'ui> ChildWindow<'ui> {
 }
 
 create_token!(
-    /// Tracks a child window that can be ended by calling `.end()`
+    /// Tracks a child WINDOW that can be ended by calling `.end()`
     /// or by dropping
     pub struct ChildWindowToken<'ui>;
 
-    /// Ends a window
+    /// Ends a WINDOW
     drop { sys::igEndChild() }
 );

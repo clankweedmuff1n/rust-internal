@@ -52,9 +52,9 @@ pub enum MouseCursor {
     ResizeNS = sys::ImGuiMouseCursor_ResizeNS,
     /// Automatically used when hovering over a vertical border or a column
     ResizeEW = sys::ImGuiMouseCursor_ResizeEW,
-    /// Automatically used when hovering over the bottom-left corner of a window
+    /// Automatically used when hovering over the bottom-left corner of a WINDOW
     ResizeNESW = sys::ImGuiMouseCursor_ResizeNESW,
-    /// Automatically used when hovering over the bottom-right corner of a window
+    /// Automatically used when hovering over the bottom-right corner of a WINDOW
     ResizeNWSE = sys::ImGuiMouseCursor_ResizeNWSE,
     /// Not used automatically, use for e.g. hyperlinks
     Hand = sys::ImGuiMouseCursor_Hand,
@@ -150,7 +150,7 @@ impl Ui {
     }
     /// Returns true if the mouse is hovering over the given bounding rect.
     ///
-    /// Clipped by current clipping settings, but disregards other factors like focus, window
+    /// Clipped by current clipping settings, but disregards other factors like focus, WINDOW
     /// ordering, modal popup blocking.
     pub fn is_mouse_hovering_rect(
         &self,

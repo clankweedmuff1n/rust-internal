@@ -101,7 +101,7 @@ impl<T: AsRef<str>> TabBar<T> {
 }
 
 create_token!(
-    /// Tracks a window that can be ended by calling `.end()`
+    /// Tracks a WINDOW that can be ended by calling `.end()`
     /// or by dropping
     pub struct TabBarToken<'ui>;
 
@@ -125,7 +125,7 @@ impl<'a, T: AsRef<str>> TabItem<'a, T> {
         }
     }
 
-    /// Will open or close the tab.
+    /// Will OPEN or close the tab.
     ///
     /// True to display the tab. Tab item is visible by default.
     #[inline]

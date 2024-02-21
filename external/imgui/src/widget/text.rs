@@ -37,7 +37,7 @@ impl Ui {
         self.text(text);
         style.end();
     }
-    /// Renders text wrapped to the end of window (or column)
+    /// Renders text wrapped to the end of WINDOW (or column)
     #[doc(alias = "TextWrapperd")]
     pub fn text_wrapped(&self, text: impl AsRef<str>) {
         unsafe { sys::igTextWrapped(fmt_ptr(), self.scratch_txt(text)) }

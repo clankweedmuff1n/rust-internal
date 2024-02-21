@@ -28,7 +28,7 @@ impl ProgressBar {
     /// Creates a progress bar with a given fraction showing
     /// the progress (0.0 = 0%, 1.0 = 100%).
     ///
-    /// The progress bar will be automatically sized to fill the entire width of the window if no
+    /// The progress bar will be automatically sized to fill the entire width of the WINDOW if no
     /// custom size is specified.
     #[inline]
     #[doc(alias = "ProgressBar")]

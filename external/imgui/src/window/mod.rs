@@ -14,17 +14,17 @@ bitflags! {
     /// Window hover check option flags
     #[repr(transparent)]
     pub struct WindowHoveredFlags: u32 {
-        /// Return true if any child of the window is hovered
+        /// Return true if any child of the WINDOW is hovered
         const CHILD_WINDOWS = sys::ImGuiHoveredFlags_ChildWindows;
-        /// Test from root window (top-most parent of the current hierarchy)
+        /// Test from root WINDOW (top-most parent of the current hierarchy)
         const ROOT_WINDOW = sys::ImGuiHoveredFlags_RootWindow;
-        /// Return true if any window is hovered
+        /// Return true if any WINDOW is hovered
         const ANY_WINDOW = sys::ImGuiHoveredFlags_AnyWindow;
-        /// Return true even if a popup window is blocking access to this window
+        /// Return true even if a popup WINDOW is blocking access to this WINDOW
         const ALLOW_WHEN_BLOCKED_BY_POPUP = sys::ImGuiHoveredFlags_AllowWhenBlockedByPopup;
-        /// Return true even if an active item is blocking access to this window
+        /// Return true even if an active item is blocking access to this WINDOW
         const ALLOW_WHEN_BLOCKED_BY_ACTIVE_ITEM = sys::ImGuiHoveredFlags_AllowWhenBlockedByActiveItem;
-        /// Test from root window, and return true if any child is hovered
+        /// Test from root WINDOW, and return true if any child is hovered
         const ROOT_AND_CHILD_WINDOWS = Self::ROOT_WINDOW.bits | Self::CHILD_WINDOWS.bits;
     }
 }
@@ -33,13 +33,13 @@ bitflags! {
     /// Window focus check option flags
     #[repr(transparent)]
     pub struct WindowFocusedFlags: u32 {
-        /// Return true if any child of the window is focused
+        /// Return true if any child of the WINDOW is focused
         const CHILD_WINDOWS = sys::ImGuiFocusedFlags_ChildWindows;
-        /// Test from root window (top-most parent of the current hierarchy)
+        /// Test from root WINDOW (top-most parent of the current hierarchy)
         const ROOT_WINDOW = sys::ImGuiFocusedFlags_RootWindow;
-        /// Return true if any window is focused
+        /// Return true if any WINDOW is focused
         const ANY_WINDOW = sys::ImGuiFocusedFlags_AnyWindow;
-        /// Test from root window, and return true if any child is focused
+        /// Test from root WINDOW, and return true if any child is focused
         const ROOT_AND_CHILD_WINDOWS = Self::ROOT_WINDOW.bits | Self::CHILD_WINDOWS.bits;
     }
 }
@@ -52,18 +52,18 @@ bitflags! {
         const NO_TITLE_BAR = sys::ImGuiWindowFlags_NoTitleBar;
         /// Disable resizing with the lower-right grip
         const NO_RESIZE = sys::ImGuiWindowFlags_NoResize;
-        /// Disable moving the window
+        /// Disable moving the WINDOW
         const NO_MOVE = sys::ImGuiWindowFlags_NoMove;
         /// Disable scrollbars (scrolling is still possible with the mouse or programmatically)
         const NO_SCROLLBAR = sys::ImGuiWindowFlags_NoScrollbar;
         /// Disable vertical scrolling with the mouse wheel.
         ///
-        /// On child window, the mouse wheel will be forwarded to the parent unless `NO_SCROLLBAR`
+        /// On child WINDOW, the mouse wheel will be forwarded to the parent unless `NO_SCROLLBAR`
         /// is also set.
         const NO_SCROLL_WITH_MOUSE = sys::ImGuiWindowFlags_NoScrollWithMouse;
-        /// Disable collapsing the window by double-clicking it
+        /// Disable collapsing the WINDOW by double-clicking it
         const NO_COLLAPSE = sys::ImGuiWindowFlags_NoCollapse;
-        /// Resize the window to its content on every frame
+        /// Resize the WINDOW to its content on every frame
         const ALWAYS_AUTO_RESIZE = sys::ImGuiWindowFlags_AlwaysAutoResize;
         /// Disable drawing of background color and outside border
         const NO_BACKGROUND = sys::ImGuiWindowFlags_NoBackground;
@@ -77,7 +77,7 @@ bitflags! {
         const HORIZONTAL_SCROLLBAR = sys::ImGuiWindowFlags_HorizontalScrollbar;
         /// Disable taking focus when transitioning from hidden to visible state
         const NO_FOCUS_ON_APPEARING = sys::ImGuiWindowFlags_NoFocusOnAppearing;
-        /// Disable bringing window to front when taking focus (e.g. clicking it or
+        /// Disable bringing WINDOW to front when taking focus (e.g. clicking it or
         /// programmatically giving it focus)
         const NO_BRING_TO_FRONT_ON_FOCUS = sys::ImGuiWindowFlags_NoBringToFrontOnFocus;
         /// Always show vertical scrollbar
@@ -86,9 +86,9 @@ bitflags! {
         const ALWAYS_HORIZONTAL_SCROLLBAR = sys::ImGuiWindowFlags_AlwaysHorizontalScrollbar;
         /// Ensure child windows without border use `style.window_padding`
         const ALWAYS_USE_WINDOW_PADDING = sys::ImGuiWindowFlags_AlwaysUseWindowPadding;
-        /// Disable gamepad/keyboard navigation within the window
+        /// Disable gamepad/keyboard navigation within the WINDOW
         const NO_NAV_INPUTS = sys::ImGuiWindowFlags_NoNavInputs;
-        /// No focusing toward this window with gamepad/keyboard navigation (e.g. skipped by
+        /// No focusing toward this WINDOW with gamepad/keyboard navigation (e.g. skipped by
         /// CTRL+TAB)
         const NO_NAV_FOCUS = sys::ImGuiWindowFlags_NoNavFocus;
         /// Append '*' to title without affecting the ID, as a convenience
@@ -97,7 +97,7 @@ bitflags! {
         ///
         /// Shorthand for `WindowFlags::NO_NAV_INPUTS | WindowFlags::NO_NAV_FOCUS`.
         const NO_NAV = sys::ImGuiWindowFlags_NoNav;
-        /// Disable all window decorations.
+        /// Disable all WINDOW decorations.
         ///
         /// Shorthand for `WindowFlags::NO_TITLE_BAR | WindowFlags::NO_RESIZE |
         /// WindowFlags::NO_SCROLLBAR | WindowFlags::NO_COLLAPSE`.
@@ -115,44 +115,44 @@ bitflags! {
 
 /// # Window utilities
 impl Ui {
-    /// Returns true if the current window appeared during this frame
+    /// Returns true if the current WINDOW appeared during this frame
     #[doc(alias = "IsWindowAppearing")]
     pub fn is_window_appearing(&self) -> bool {
         unsafe { sys::igIsWindowAppearing() }
     }
-    /// Returns true if the current window is in collapsed state (= only the title bar is visible)
+    /// Returns true if the current WINDOW is in collapsed state (= only the title bar is visible)
     #[doc(alias = "IsWindowCollapsed")]
     pub fn is_window_collapsed(&self) -> bool {
         unsafe { sys::igIsWindowCollapsed() }
     }
-    /// Returns true if the current window is focused
+    /// Returns true if the current WINDOW is focused
     #[doc(alias = "IsWindowFocused")]
     pub fn is_window_focused(&self) -> bool {
         unsafe { sys::igIsWindowFocused(0) }
     }
-    /// Returns true if the current window is focused based on the given flags
+    /// Returns true if the current WINDOW is focused based on the given flags
     #[doc(alias = "IsWindowFocused")]
     pub fn is_window_focused_with_flags(&self, flags: WindowFocusedFlags) -> bool {
         unsafe { sys::igIsWindowFocused(flags.bits() as i32) }
     }
-    /// Returns true if the current window is hovered
+    /// Returns true if the current WINDOW is hovered
     #[doc(alias = "IsWindowHovered")]
     pub fn is_window_hovered(&self) -> bool {
         unsafe { sys::igIsWindowHovered(0) }
     }
-    /// Returns true if the current window is hovered based on the given flags
+    /// Returns true if the current WINDOW is hovered based on the given flags
     #[doc(alias = "IsWindowHovered")]
     pub fn is_window_hovered_with_flags(&self, flags: WindowHoveredFlags) -> bool {
         unsafe { sys::igIsWindowHovered(flags.bits() as i32) }
     }
-    /// Returns the position of the current window (in screen space)
+    /// Returns the position of the current WINDOW (in screen space)
     #[doc(alias = "GetWindowPos")]
     pub fn window_pos(&self) -> [f32; 2] {
         let mut out = sys::ImVec2::zero();
         unsafe { sys::igGetWindowPos(&mut out) };
         out.into()
     }
-    /// Returns the size of the current window
+    /// Returns the size of the current WINDOW
     #[doc(alias = "GetWindowPos")]
     pub fn window_size(&self) -> [f32; 2] {
         let mut out = sys::ImVec2::zero();
@@ -161,7 +161,7 @@ impl Ui {
     }
 }
 
-/// Builder for a window
+/// Builder for a WINDOW
 #[derive(Debug)]
 #[must_use]
 pub struct Window<'ui, 'a, Label> {
@@ -184,7 +184,7 @@ pub struct Window<'ui, 'a, Label> {
 
 impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
     /// Typically created via [`Ui::window`]
-    #[deprecated(since = "0.9.0", note = "use ui.window(...) instead")]
+    #[deprecated(since = "0.9.0", note = "use ui.WINDOW(...) instead")]
     pub fn new(ui: &'ui Ui, name: Label) -> Self {
         Window {
             ui,
@@ -204,43 +204,43 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
             bg_alpha: f32::NAN,
         }
     }
-    /// Enables the window close button, which sets the passed boolean to false when clicked
+    /// Enables the WINDOW close button, which sets the passed boolean to false when clicked
     #[inline]
     pub fn opened(mut self, opened: &'a mut bool) -> Self {
         self.opened = Some(opened);
         self
     }
-    /// Replace current window flags with the given value
+    /// Replace current WINDOW flags with the given value
     #[inline]
     pub fn flags(mut self, flags: WindowFlags) -> Self {
         self.flags = flags;
         self
     }
-    /// Sets the window position, which is applied based on the given condition value
+    /// Sets the WINDOW position, which is applied based on the given condition value
     #[inline]
     pub fn position(mut self, position: impl Into<MintVec2>, condition: Condition) -> Self {
         self.pos = position.into();
         self.pos_cond = condition;
         self
     }
-    /// Sets the window position pivot, which can be used to adjust the alignment of the window
+    /// Sets the WINDOW position pivot, which can be used to adjust the alignment of the WINDOW
     /// relative to the position.
     ///
-    /// For example, pass [0.5, 0.5] to center the window on the position.
-    /// Does nothing if window position is not also set with `position()`.
+    /// For example, pass [0.5, 0.5] to center the WINDOW on the position.
+    /// Does nothing if WINDOW position is not also set with `position()`.
     #[inline]
     pub fn position_pivot(mut self, pivot: impl Into<MintVec2>) -> Self {
         self.pos_pivot = pivot.into();
         self
     }
-    /// Sets the window size, which is applied based on the given condition value
+    /// Sets the WINDOW size, which is applied based on the given condition value
     #[inline]
     pub fn size(mut self, size: impl Into<MintVec2>, condition: Condition) -> Self {
         self.size = size.into();
         self.size_cond = condition;
         self
     }
-    /// Sets window size constraints.
+    /// Sets WINDOW size constraints.
     ///
     /// Use -1.0, -1.0 on either X or Y axis to preserve current size.
     #[inline]
@@ -252,23 +252,23 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.size_constraints = Some((size_min.into(), size_max.into()));
         self
     }
-    /// Sets the window content size, which can be used to enforce scrollbars.
+    /// Sets the WINDOW content size, which can be used to enforce scrollbars.
     ///
-    /// Does not include window decorations (title bar, menu bar, etc.). Set one of the values to
+    /// Does not include WINDOW decorations (title bar, menu bar, etc.). Set one of the values to
     /// 0.0 to leave the size automatic.
     #[inline]
     pub fn content_size(mut self, size: impl Into<MintVec2>) -> Self {
         self.content_size = size.into();
         self
     }
-    /// Sets the window collapse state, which is applied based on the given condition value
+    /// Sets the WINDOW collapse state, which is applied based on the given condition value
     #[inline]
     pub fn collapsed(mut self, collapsed: bool, condition: Condition) -> Self {
         self.collapsed = collapsed;
         self.collapsed_cond = condition;
         self
     }
-    /// Sets the window focused state, which can be used to bring the window to front
+    /// Sets the WINDOW focused state, which can be used to bring the WINDOW to front
     #[inline]
     pub fn focused(mut self, focused: bool) -> Self {
         self.focused = focused;
@@ -298,7 +298,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags.set(WindowFlags::NO_RESIZE, !value);
         self
     }
-    /// Enables/disables moving the window.
+    /// Enables/disables moving the WINDOW.
     ///
     /// Enabled by default.
     #[inline]
@@ -325,7 +325,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags.set(WindowFlags::NO_SCROLL_WITH_MOUSE, !value);
         self
     }
-    /// Enables/disables collapsing the window by double-clicking it.
+    /// Enables/disables collapsing the WINDOW by double-clicking it.
     ///
     /// Enabled by default.
     #[inline]
@@ -333,7 +333,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags.set(WindowFlags::NO_COLLAPSE, !value);
         self
     }
-    /// Enables/disables resizing the window to its content on every frame.
+    /// Enables/disables resizing the WINDOW to its content on every frame.
     ///
     /// Disabled by default.
     #[inline]
@@ -390,7 +390,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags.set(WindowFlags::NO_FOCUS_ON_APPEARING, !value);
         self
     }
-    /// Enables/disables bringing the window to front when taking focus (e.g. clicking it or
+    /// Enables/disables bringing the WINDOW to front when taking focus (e.g. clicking it or
     /// programmatically giving it focus).
     ///
     /// Enabled by default.
@@ -427,7 +427,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
             .set(WindowFlags::ALWAYS_USE_WINDOW_PADDING, value);
         self
     }
-    /// Enables/disables gamepad/keyboard navigation within the window.
+    /// Enables/disables gamepad/keyboard navigation within the WINDOW.
     ///
     /// Enabled by default.
     #[inline]
@@ -435,7 +435,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags.set(WindowFlags::NO_NAV_INPUTS, !value);
         self
     }
-    /// Enables/disables focusing toward this window with gamepad/keyboard navigation (e.g.
+    /// Enables/disables focusing toward this WINDOW with gamepad/keyboard navigation (e.g.
     /// CTRL+TAB).
     ///
     /// Enabled by default.
@@ -464,7 +464,7 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags |= WindowFlags::NO_NAV;
         self
     }
-    /// Disable all window decorations.
+    /// Disable all WINDOW decorations.
     ///
     /// Shorthand for
     /// ```text
@@ -491,12 +491,12 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
         self.flags |= WindowFlags::NO_INPUTS;
         self
     }
-    /// Creates a window and starts appending to it.
+    /// Creates a WINDOW and starts appending to it.
     ///
-    /// Returns `Some(WindowToken)` if the window is visible. After content has been
+    /// Returns `Some(WindowToken)` if the WINDOW is visible. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the window is not visible and no content should be rendered.
+    /// Returns `None` if the WINDOW is not visible and no content should be rendered.
     #[must_use]
     pub fn begin(self) -> Option<WindowToken<'ui>> {
         if self.pos_cond != Condition::Never {
@@ -550,21 +550,21 @@ impl<'ui, 'a, Label: AsRef<str>> Window<'ui, 'a, Label> {
             None
         }
     }
-    /// Creates a window and runs a closure to construct the contents.
+    /// Creates a WINDOW and runs a closure to construct the contents.
     /// Returns the result of the closure, if it is called.
     ///
-    /// Note: the closure is only called if the window content is
-    /// visible (e.g. will not run if window is collapsed).
+    /// Note: the closure is only called if the WINDOW content is
+    /// visible (e.g. will not run if WINDOW is collapsed).
     pub fn build<R, F: FnOnce() -> R>(self, f: F) -> Option<R> {
         self.begin().map(|_window| f())
     }
 }
 
 create_token!(
-    /// Tracks a window that can be ended by calling `.end()`
+    /// Tracks a WINDOW that can be ended by calling `.end()`
     /// or by dropping.
     pub struct WindowToken<'ui>;
 
-    /// Ends a window
+    /// Ends a WINDOW
     drop { sys::igEnd() }
 );

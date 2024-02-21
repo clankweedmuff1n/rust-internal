@@ -177,7 +177,7 @@ unsafe fn push_style_var(style_var: StyleVar) {
     }
 }
 
-/// # Parameter stacks (current window)
+/// # Parameter stacks (current WINDOW)
 impl Ui {
     /// Changes the item width by pushing a change to the item width stack.
     ///
@@ -185,8 +185,8 @@ impl Ui {
     /// `ItemWidthStackToken` goes out of scope, or `.end()` is called.
     ///
     /// - `> 0.0`: width is `item_width` pixels
-    /// - `= 0.0`: default to ~2/3 of window width
-    /// - `< 0.0`: `item_width` pixels relative to the right of window (-1.0 always aligns width to
+    /// - `= 0.0`: default to ~2/3 of WINDOW width
+    /// - `< 0.0`: `item_width` pixels relative to the right of WINDOW (-1.0 always aligns width to
     /// the right side)
     #[doc(alias = "PushItemWith")]
     pub fn push_item_width(&self, item_width: f32) -> ItemWidthStackToken<'_> {
@@ -196,8 +196,8 @@ impl Ui {
     /// Sets the width of the next item.
     ///
     /// - `> 0.0`: width is `item_width` pixels
-    /// - `= 0.0`: default to ~2/3 of window width
-    /// - `< 0.0`: `item_width` pixels relative to the right of window (-1.0 always aligns width to
+    /// - `= 0.0`: default to ~2/3 of WINDOW width
+    /// - `< 0.0`: `item_width` pixels relative to the right of WINDOW (-1.0 always aligns width to
     /// the right side)
     #[doc(alias = "SetNextItemWidth")]
     pub fn set_next_item_width(&self, item_width: f32) {
@@ -211,7 +211,7 @@ impl Ui {
         unsafe { sys::igCalcItemWidth() }
     }
 
-    /// Makes the text wrap at the end of window/column (which is generally the default), by
+    /// Makes the text wrap at the end of WINDOW/column (which is generally the default), by
     /// pushing a change to the text wrapping position stack.
     ///
     /// This is the same as calling [push_text_wrap_pos_with_pos](Self::push_text_wrap_pos_with_pos)
@@ -229,8 +229,8 @@ impl Ui {
     /// Returns a `TextWrapPosStackToken`. The pushed position item is popped when either
     /// `TextWrapPosStackToken` goes out of scope, or `.end()` is called.
     ///
-    /// - `> 0.0`: wrap at `wrap_pos_x` position in window local space
-    /// - `= 0.0`: wrap to end of window (or column)
+    /// - `> 0.0`: wrap at `wrap_pos_x` position in WINDOW local space
+    /// - `= 0.0`: wrap to end of WINDOW (or column)
     /// - `< 0.0`: no wrapping
     #[doc(alias = "PushTextWrapPos")]
     pub fn push_text_wrap_pos_with_pos(&self, wrap_pos_x: f32) -> TextWrapPosStackToken<'_> {
@@ -406,10 +406,10 @@ impl Ui {
     /// # let ui = imgui.frame();
     ///
     /// ui.window("Example").build(|| {
-    ///     // The window adds "Example" to the token stack.
+    ///     // The WINDOW adds "Example" to the token stack.
     ///     for num in 0..10 {
     ///         // And now we add the loop number to the stack too,
-    ///         // to make our buttons unique within this window.
+    ///         // to make our buttons unique within this WINDOW.
     ///         let _id = ui.push_id_usize(num);
     ///         if ui.button("Click!") {
     ///             println!("Button {} clicked", num);

@@ -15,20 +15,20 @@ bitflags!(
         const FRAMED = sys::ImGuiTreeNodeFlags_Framed;
         /// Hit testing to allow subsequent widgets to overlap this one
         const ALLOW_ITEM_OVERLAP = sys::ImGuiTreeNodeFlags_AllowItemOverlap;
-        /// Don't push a tree node when open (e.g. for CollapsingHeader) = no extra indent nor
+        /// Don't push a tree node when OPEN (e.g. for CollapsingHeader) = no extra indent nor
         /// pushing on ID stack
         const NO_TREE_PUSH_ON_OPEN = sys::ImGuiTreeNodeFlags_NoTreePushOnOpen;
-        /// Don't automatically and temporarily open node when Logging is active (by default
-        /// logging will automatically open tree nodes)
+        /// Don't automatically and temporarily OPEN node when Logging is active (by default
+        /// logging will automatically OPEN tree nodes)
         const NO_AUTO_OPEN_ON_LOG = sys::ImGuiTreeNodeFlags_NoAutoOpenOnLog;
-        /// Default node to be open
+        /// Default node to be OPEN
         const DEFAULT_OPEN = sys::ImGuiTreeNodeFlags_DefaultOpen;
-        /// Need double-click to open node
+        /// Need double-click to OPEN node
         const OPEN_ON_DOUBLE_CLICK = sys::ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        /// Only open when clicking on the arrow part.
+        /// Only OPEN when clicking on the arrow part.
         ///
         /// If `TreeNodeFlags::OPEN_ON_DOUBLE_CLICK` is also set, single-click arrow or
-        /// double-click all box to open.
+        /// double-click all box to OPEN.
         const OPEN_ON_ARROW = sys::ImGuiTreeNodeFlags_OpenOnArrow;
         /// No collapsing, no arrow (use as a convenience for leaf nodes)
         const LEAF = sys::ImGuiTreeNodeFlags_Leaf;
@@ -199,7 +199,7 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
         self
     }
 
-    /// Enables/disables automatic tree push when the tree node is open (= adds extra indentation
+    /// Enables/disables automatic tree push when the tree node is OPEN (= adds extra indentation
     /// and pushes to the ID stack).
     ///
     /// Enabled by default.
@@ -210,7 +210,7 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
 
     /// Enables/disables automatic opening of the tree node when logging is active.
     ///
-    /// By default, logging will automatically open all tree nodes.
+    /// By default, logging will automatically OPEN all tree nodes.
     ///
     /// Enabled by default.
     pub fn auto_open_on_log(mut self, value: bool) -> Self {
@@ -218,7 +218,7 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
         self
     }
 
-    /// Sets the default open state for the tree node.
+    /// Sets the default OPEN state for the tree node.
     ///
     /// Tree nodes are closed by default.
     pub fn default_open(mut self, value: bool) -> Self {
@@ -226,7 +226,7 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
         self
     }
 
-    /// Only open when the tree node is double-clicked.
+    /// Only OPEN when the tree node is double-clicked.
     ///
     /// Disabled by default.
     pub fn open_on_double_click(mut self, value: bool) -> Self {
@@ -234,7 +234,7 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
         self
     }
 
-    /// Only open when clicking the arrow part of the tree node.
+    /// Only OPEN when clicking the arrow part of the tree node.
     ///
     /// Disabled by default.
     pub fn open_on_arrow(mut self, value: bool) -> Self {
@@ -277,10 +277,10 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
 
     /// Pushes a tree node and starts appending to it.
     ///
-    /// Returns `Some(TreeNodeToken)` if the tree node is open. After content has been
+    /// Returns `Some(TreeNodeToken)` if the tree node is OPEN. After content has been
     /// rendered, the token can be popped by calling `.pop()`.
     ///
-    /// Returns `None` if the tree node is not open and no content should be rendered.
+    /// Returns `None` if the tree node is not OPEN and no content should be rendered.
     pub fn push(self) -> Option<TreeNodeToken<'a>> {
         let open = unsafe {
             if self.opened_cond != Condition::Never {
@@ -320,7 +320,7 @@ impl<'a, T: AsRef<str>, L: AsRef<str>> TreeNode<'a, T, L> {
     /// Creates a tree node and runs a closure to construct the contents.
     /// Returns the result of the closure, if it is called.
     ///
-    /// Note: the closure is not called if the tree node is not open.
+    /// Note: the closure is not called if the tree node is not OPEN.
     pub fn build<R, F: FnOnce() -> R>(self, f: F) -> Option<R> {
         self.push().map(|_node| f())
     }
@@ -393,7 +393,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
         self.flags.set(TreeNodeFlags::ALLOW_ITEM_OVERLAP, value);
         self
     }
-    /// Sets the default open state for the collapsing header.
+    /// Sets the default OPEN state for the collapsing header.
     ///
     /// Collapsing headers are closed by default.
     #[inline]
@@ -401,7 +401,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
         self.flags.set(TreeNodeFlags::DEFAULT_OPEN, value);
         self
     }
-    /// Only open when the collapsing header is double-clicked.
+    /// Only OPEN when the collapsing header is double-clicked.
     ///
     /// Disabled by default.
     #[inline]
@@ -409,7 +409,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
         self.flags.set(TreeNodeFlags::OPEN_ON_DOUBLE_CLICK, value);
         self
     }
-    /// Only open when clicking the arrow part of the collapsing header.
+    /// Only OPEN when clicking the arrow part of the collapsing header.
     ///
     /// Disabled by default.
     #[inline]
@@ -444,7 +444,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
 
     /// Begins the collapsing header.
     ///
-    /// Returns true if the collapsing header is open and content should be rendered.
+    /// Returns true if the collapsing header is OPEN and content should be rendered.
     ///
     /// This is the same as [build](Self::build) but is provided for consistent naming.
     #[must_use]
@@ -454,7 +454,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
 
     /// Begins the collapsing header.
     ///
-    /// Returns true if the collapsing header is open and content should be rendered.
+    /// Returns true if the collapsing header is OPEN and content should be rendered.
     ///
     /// This is the same as [build_with_close_button](Self::build_with_close_button)
     /// but is provided for consistent naming.
@@ -465,7 +465,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
 
     /// Builds the collapsing header.
     ///
-    /// Returns true if the collapsing header is open and content should be rendered.
+    /// Returns true if the collapsing header is OPEN and content should be rendered.
     #[must_use]
     #[inline]
     pub fn build(self, ui: &Ui) -> bool {
@@ -479,7 +479,7 @@ impl<T: AsRef<str>> CollapsingHeader<T> {
     /// Builds the collapsing header, and adds an additional close button that changes the value of
     /// the given mutable reference when clicked.
     ///
-    /// Returns true if the collapsing header is open and content should be rendered.
+    /// Returns true if the collapsing header is OPEN and content should be rendered.
     #[must_use]
     #[inline]
     pub fn build_with_close_button(self, ui: &Ui, opened: &mut bool) -> bool {

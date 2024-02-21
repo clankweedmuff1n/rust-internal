@@ -24,7 +24,7 @@ impl<T: AsRef<str>> ListBox<T> {
     /// Sets the list box size based on the given width and height
     /// If width or height are 0 or smaller, a default value is calculated
     /// Helper to calculate the size of a listbox and display a label on the right.
-    /// Tip: To have a list filling the entire window width, PushItemWidth(-1) and pass an non-visible label e.g. "##empty"
+    /// Tip: To have a list filling the entire WINDOW width, PushItemWidth(-1) and pass an non-visible label e.g. "##empty"
     ///
     /// Default: [0.0, 0.0], in which case the combobox calculates a sensible width and height
     #[inline]
@@ -34,10 +34,10 @@ impl<T: AsRef<str>> ListBox<T> {
     }
     /// Creates a list box and starts appending to it.
     ///
-    /// Returns `Some(ListBoxToken)` if the list box is open. After content has been
+    /// Returns `Some(ListBoxToken)` if the list box is OPEN. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the list box is not open and no content should be rendered.
+    /// Returns `None` if the list box is not OPEN and no content should be rendered.
     #[must_use]
     pub fn begin(self, ui: &Ui) -> Option<ListBoxToken<'_>> {
         let should_render =
@@ -51,7 +51,7 @@ impl<T: AsRef<str>> ListBox<T> {
     /// Creates a list box and runs a closure to construct the list contents.
     /// Returns the result of the closure, if it is called.
     ///
-    /// Note: the closure is not called if the list box is not open.
+    /// Note: the closure is not called if the list box is not OPEN.
     pub fn build<R, F: FnOnce() -> R>(self, ui: &Ui, f: F) -> Option<R> {
         self.begin(ui).map(|_list| f())
     }

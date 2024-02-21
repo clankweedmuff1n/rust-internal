@@ -23,7 +23,7 @@ impl Ui {
 
     /// Call between widgets or groups to layout them horizontally.
     ///
-    /// X position is given in window coordinates.
+    /// X position is given in WINDOW coordinates.
     ///
     /// This is equivalent to calling [same_line_with_pos](Self::same_line_with_pos)
     /// with the `pos` set to 0.0, which uses `Style::item_spacing`.
@@ -34,7 +34,7 @@ impl Ui {
 
     /// Call between widgets or groups to layout them horizontally.
     ///
-    /// X position is given in window coordinates.
+    /// X position is given in WINDOW coordinates.
     ///
     /// This is equivalent to calling [same_line_with_spacing](Self::same_line_with_spacing)
     /// with the `spacing` set to -1.0, which means no extra spacing.
@@ -45,7 +45,7 @@ impl Ui {
 
     /// Call between widgets or groups to layout them horizontally.
     ///
-    /// X position is given in window coordinates.
+    /// X position is given in WINDOW coordinates.
     #[doc(alias = "SameLine")]
     pub fn same_line_with_spacing(&self, pos_x: f32, spacing_w: f32) {
         unsafe { sys::igSameLine(pos_x, spacing_w) }
@@ -61,9 +61,9 @@ impl Ui {
     pub fn spacing(&self) {
         unsafe { sys::igSpacing() }
     }
-    /// Fills a space of `size` in pixels with nothing on the current window.
+    /// Fills a space of `size` in pixels with nothing on the current WINDOW.
     ///
-    /// Can be used to move the cursor on the window.
+    /// Can be used to move the cursor on the WINDOW.
     #[doc(alias = "Dummy")]
     pub fn dummy(&self, size: impl Into<MintVec2>) {
         unsafe { sys::igDummy(size.into().into()) }
@@ -116,21 +116,21 @@ impl Ui {
         group.end();
         result
     }
-    /// Returns the cursor position (in window coordinates)
+    /// Returns the cursor position (in WINDOW coordinates)
     #[doc(alias = "GetCursorPos")]
     pub fn cursor_pos(&self) -> [f32; 2] {
         let mut out = sys::ImVec2::zero();
         unsafe { sys::igGetCursorPos(&mut out) };
         out.into()
     }
-    /// Sets the cursor position (in window coordinates).
+    /// Sets the cursor position (in WINDOW coordinates).
     ///
     /// This sets the point on which the next widget will be drawn.
     #[doc(alias = "SetCursorPos")]
     pub fn set_cursor_pos(&self, pos: impl Into<MintVec2>) {
         unsafe { sys::igSetCursorPos(pos.into().into()) };
     }
-    /// Returns the initial cursor position (in window coordinates)
+    /// Returns the initial cursor position (in WINDOW coordinates)
     #[doc(alias = "GetCursorStartPos")]
     pub fn cursor_start_pos(&self) -> [f32; 2] {
         let mut out = sys::ImVec2::zero();

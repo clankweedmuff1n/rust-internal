@@ -28,7 +28,7 @@ impl Ui {
         unsafe { sys::igGetFontTexUvWhitePixel(&mut out) };
         out.into()
     }
-    /// Sets the font scale of the current window
+    /// Sets the font scale of the current WINDOW
     #[doc(alias = "SetWindowFontScale")]
     pub fn set_window_font_scale(&self, scale: f32) {
         unsafe { sys::igSetWindowFontScale(scale) }

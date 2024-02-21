@@ -6,7 +6,7 @@ use winapi::um::libloaderapi::GetModuleHandleW;
 use crate::gui::gui;
 
 extern "system" fn window_process(window: HWND, message: UINT, wide_param: WPARAM, long_param: LPARAM) -> LRESULT {
-    // Your window procedure implementation
+    // Your WINDOW procedure implementation
     unimplemented!()
 }
 

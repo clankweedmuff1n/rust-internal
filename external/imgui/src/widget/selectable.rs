@@ -8,7 +8,7 @@ bitflags!(
     /// Flags for selectables
     #[repr(transparent)]
     pub struct SelectableFlags: u32 {
-        /// Clicking this don't close parent popup window
+        /// Clicking this don't close parent popup WINDOW
         const DONT_CLOSE_POPUPS = sys::ImGuiSelectableFlags_DontClosePopups;
         /// Selectable frame can span all columns (text will still fit in current column)
         const SPAN_ALL_COLUMNS = sys::ImGuiSelectableFlags_SpanAllColumns;
@@ -82,7 +82,7 @@ impl<'ui, T: AsRef<str>> Selectable<'ui, T> {
         self.selected = selected;
         self
     }
-    /// Enables/disables closing parent popup window on click.
+    /// Enables/disables closing parent popup WINDOW on click.
     ///
     /// Default: enabled
     pub fn close_popups(mut self, value: bool) -> Self {

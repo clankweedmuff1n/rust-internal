@@ -1,7 +1,7 @@
-//! The draw list lets you create custom graphics within a window.
+//! The draw list lets you create custom graphics within a WINDOW.
 //!
-//! Each dear imgui window contains its own draw list. You can use
-//! [`Ui::get_window_draw_list`] to access the current window draw
+//! Each dear imgui WINDOW contains its own draw list. You can use
+//! [`Ui::get_window_draw_list`] to access the current WINDOW draw
 //! list and draw custom primitives. You can interleave normal widget
 //! calls and adding primitives to the current draw list.
 //!
@@ -113,7 +113,7 @@ impl<'ui> DrawListMut<'ui> {
             .is_err();
         if already_loaded {
             let name = match t {
-                DrawListType::Window => "window",
+                DrawListType::Window => "WINDOW",
                 DrawListType::Background => "background",
                 DrawListType::Foreground => "foreground",
             };
@@ -511,7 +511,7 @@ impl<'ui> Line<'ui> {
         self
     }
 
-    /// Draw the line on the window
+    /// Draw the line on the WINDOW
     pub fn build(self) {
         unsafe {
             sys::ImDrawList_AddLine(
@@ -563,7 +563,7 @@ impl<'ui> Polyline<'ui> {
         self
     }
 
-    /// Draw the line on the window
+    /// Draw the line on the WINDOW
     pub fn build(self) {
         if self.filled {
             unsafe {
@@ -667,7 +667,7 @@ impl<'ui> Rect<'ui> {
         self
     }
 
-    /// Draw the rectangle on the window.
+    /// Draw the rectangle on the WINDOW.
     pub fn build(self) {
         if self.filled {
             unsafe {
@@ -696,7 +696,7 @@ impl<'ui> Rect<'ui> {
     }
 }
 
-/// Represents a triangle about to be drawn on the window
+/// Represents a triangle about to be drawn on the WINDOW
 #[must_use = "should call .build() to draw the object"]
 pub struct Triangle<'ui> {
     p1: [f32; 2],
@@ -742,7 +742,7 @@ impl<'ui> Triangle<'ui> {
         self
     }
 
-    /// Draw the triangle on the window.
+    /// Draw the triangle on the WINDOW.
     pub fn build(self) {
         if self.filled {
             unsafe {
@@ -822,7 +822,7 @@ impl<'ui> Circle<'ui> {
         self
     }
 
-    /// Draw the circle on the window.
+    /// Draw the circle on the WINDOW.
     pub fn build(self) {
         if self.filled {
             unsafe {
@@ -901,7 +901,7 @@ impl<'ui> BezierCurve<'ui> {
         self
     }
 
-    /// Draw the curve on the window.
+    /// Draw the curve on the WINDOW.
     pub fn build(self) {
         unsafe {
             sys::ImDrawList_AddBezierCubic(
@@ -970,7 +970,7 @@ impl<'ui> Image<'ui> {
         self
     }
 
-    /// Draw the image on the window.
+    /// Draw the image on the WINDOW.
     pub fn build(self) {
         use std::os::raw::c_void;
 
@@ -1060,7 +1060,7 @@ impl<'ui> ImageQuad<'ui> {
         self
     }
 
-    /// Draw the image on the window.
+    /// Draw the image on the WINDOW.
     pub fn build(self) {
         use std::os::raw::c_void;
 
@@ -1173,7 +1173,7 @@ impl<'ui> ImageRounded<'ui> {
         self
     }
 
-    /// Draw the image on the window.
+    /// Draw the image on the WINDOW.
     pub fn build(self) {
         use std::os::raw::c_void;
 
@@ -1207,7 +1207,7 @@ impl<'ui, F: FnOnce() + 'static> Callback<'ui, F> {
             callback,
         }
     }
-    /// Adds the callback to the draw-list so it will be run when the window is drawn
+    /// Adds the callback to the draw-list so it will be run when the WINDOW is drawn
     pub fn build(self) {
         use std::os::raw::c_void;
         // F is Sized, so *mut F must be a thin pointer.

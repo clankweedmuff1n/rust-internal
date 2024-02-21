@@ -28,7 +28,7 @@ impl Ui {
             f();
         }
     }
-    /// Creates and starts appending to the menu bar of the current window.
+    /// Creates and starts appending to the menu bar of the current WINDOW.
     ///
     /// Returns `Some(MenuBarToken)` if the menu bar is visible. After content has been
     /// rendered, the token must be ended by calling `.end()`.
@@ -43,7 +43,7 @@ impl Ui {
             None
         }
     }
-    /// Creates a menu bar in the current window and runs a closure to construct the contents.
+    /// Creates a menu bar in the current WINDOW and runs a closure to construct the contents.
     ///
     /// Note: the closure is not called if the menu bar is not visible.
     #[doc(alias = "BeginMenuBar")]

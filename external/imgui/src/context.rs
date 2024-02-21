@@ -664,7 +664,7 @@ impl Context {
     }
 
     /// Installs a [`PlatformViewportBackend`](crate::PlatformViewportBackend) that is used to
-    /// create platform windows on demand if a window is dragged outside of the main viewport.
+    /// create platform windows on demand if a WINDOW is dragged outside of the main viewport.
     pub fn set_platform_backend<T: crate::PlatformViewportBackend>(&mut self, backend: T) {
         let ctx = Box::new(UnsafeCell::new(crate::PlatformViewportContext {
             backend: Box::new(backend),

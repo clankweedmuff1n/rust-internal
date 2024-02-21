@@ -19,14 +19,14 @@ impl Ui {
     }
     /// Returns the maximum horizontal scrolling position.
     ///
-    /// Roughly equal to content size X - window size X.
+    /// Roughly equal to content size X - WINDOW size X.
     #[doc(alias = "GetScrollMaxX")]
     pub fn scroll_max_x(&self) -> f32 {
         unsafe { sys::igGetScrollMaxX() }
     }
     /// Returns the maximum vertical scrolling position.
     ///
-    /// Roughly equal to content size Y - window size Y.
+    /// Roughly equal to content size Y - WINDOW size Y.
     #[doc(alias = "GetScrollMaxY")]
     pub fn scroll_max_y(&self) -> f32 {
         unsafe { sys::igGetScrollMaxY() }

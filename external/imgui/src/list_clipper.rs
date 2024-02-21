@@ -183,7 +183,7 @@ impl Iterator for ListClipperIterator<'_> {
                     self.exhausted = true;
                     None
                 } else {
-                    // setup iteration for this step's chunk
+                    // SETUP iteration for this step's chunk
                     let start = self.list_clipper.display_start();
                     let end = self.list_clipper.display_end();
 
@@ -204,7 +204,7 @@ impl Iterator for ListClipperIterator<'_> {
 
 #[test]
 fn cpp_style_usage() {
-    // setup
+    // SETUP
     let (_guard, mut ctx) = crate::test::test_ctx_initialized();
     let ui = ctx.frame();
 
@@ -229,7 +229,7 @@ fn cpp_style_usage() {
     }
 
     // Check it's called an expected amount of time (only the ones
-    // visible in given sized window)
+    // visible in given sized WINDOW)
     assert_eq!(ticks, 44);
 
     // Calling end multiple times is fine albeit redundant
@@ -243,7 +243,7 @@ fn cpp_style_usage() {
 
 #[test]
 fn iterator_usage() {
-    // setup
+    // SETUP
     let (_guard, mut ctx) = crate::test::test_ctx_initialized();
     let ui = ctx.frame();
 

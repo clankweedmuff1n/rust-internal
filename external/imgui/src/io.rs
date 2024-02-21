@@ -200,12 +200,12 @@ pub struct Io {
 
     /// Global scale for all fonts
     pub font_global_scale: f32,
-    /// Allow user to scale text of individual window with CTRL+wheel
+    /// Allow user to scale text of individual WINDOW with CTRL+wheel
     pub font_allow_user_scaling: bool,
 
     pub(crate) font_default: *mut Font,
 
-    /// For retina display or other situations where window coordinates are different from
+    /// For retina display or other situations where WINDOW coordinates are different from
     /// framebuffer coordinates
     pub display_framebuffer_scale: [f32; 2],
 

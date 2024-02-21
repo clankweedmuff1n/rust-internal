@@ -105,13 +105,13 @@ pub trait PlatformViewportBackend: 'static {
     /// Called by imgui when a new [`Viewport`] is created.
     ///
     /// # Notes
-    /// This function should initiate the creation of a platform window.
-    /// The window should be invisible.
+    /// This function should initiate the creation of a platform WINDOW.
+    /// The WINDOW should be invisible.
     fn create_window(&mut self, viewport: &mut Viewport);
     /// Called by imgui when a [`Viewport`] is about to be destroyed.
     ///
     /// # Notes
-    /// This function should initiate the destruction of the platform window.
+    /// This function should initiate the destruction of the platform WINDOW.
     fn destroy_window(&mut self, viewport: &mut Viewport);
     /// Called by imgui to make a [`Viewport`] visible.
     fn show_window(&mut self, viewport: &mut Viewport);
@@ -123,17 +123,17 @@ pub trait PlatformViewportBackend: 'static {
     /// Called by imgui to get the position of a [`Viewport`].
     ///
     /// # Notes
-    /// You should return the position of the window's content area (excluding title bar etc.)
+    /// You should return the position of the WINDOW's content area (excluding title bar etc.)
     fn get_window_pos(&mut self, viewport: &mut Viewport) -> [f32; 2];
     /// Called by imgui to set the size of a [`Viewport`].
     ///
     /// # Notes
-    /// `size` specifies the size of the window's content area (excluding title bar etc.)
+    /// `size` specifies the size of the WINDOW's content area (excluding title bar etc.)
     fn set_window_size(&mut self, viewport: &mut Viewport, size: [f32; 2]);
     /// Called by imgui to get the size of a [`Viewport`].
     ///
     /// # Notes
-    /// you should return the size of the window's content area (excluding title bar etc.)
+    /// you should return the size of the WINDOW's content area (excluding title bar etc.)
     fn get_window_size(&mut self, viewport: &mut Viewport) -> [f32; 2];
     /// Called by imgui to make a [`Viewport`] steal the focus.
     fn set_window_focus(&mut self, viewport: &mut Viewport);

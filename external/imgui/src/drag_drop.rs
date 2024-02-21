@@ -43,15 +43,15 @@ bitflags!(
         /// avoid subsequent user code submitting tooltips. This flag disable this behavior so you
         /// can still call igIsItemHovered() on the source item.
         const SOURCE_NO_DISABLE_HOVER = sys::ImGuiDragDropFlags_SourceNoDisableHover;
-        /// Disable the behavior that allows to open tree nodes and collapsing header by holding
+        /// Disable the behavior that allows to OPEN tree nodes and collapsing header by holding
         /// over them while dragging a source item.
         const SOURCE_NO_HOLD_TO_OPEN_OTHERS = sys::ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
         /// Allow items such as igText(), igImage() that have no unique identifier to be used as
-        /// drag source, by manufacturing a temporary identifier based on their window-relative
+        /// drag source, by manufacturing a temporary identifier based on their WINDOW-relative
         /// position. This is extremely unusual within the dear imgui ecosystem and so we made it
         /// explicit.
         const SOURCE_ALLOW_NULL_ID = sys::ImGuiDragDropFlags_SourceAllowNullID;
-        /// External source (from outside of imgui), won't attempt to read current item/window
+        /// External source (from outside of imgui), won't attempt to read current item/WINDOW
         /// info. Will always return true. Only one Extern source can be active simultaneously.
         const SOURCE_EXTERN = sys::ImGuiDragDropFlags_SourceExtern;
         /// Automatically expire the payload if the source ceases to be submitted (otherwise

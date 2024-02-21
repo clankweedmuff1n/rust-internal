@@ -40,7 +40,7 @@ impl<'ui, 'p, Label: AsRef<str>> PopupModal<'ui, 'p, Label> {
         }
     }
     /// Pass a mutable boolean which will be updated to refer to the current
-    /// "open" state of the modal.
+    /// "OPEN" state of the modal.
     pub fn opened(mut self, opened: &'p mut bool) -> Self {
         self.opened = Some(opened);
         self
@@ -152,7 +152,7 @@ impl<'ui, 'p, Label: AsRef<str>> PopupModal<'ui, 'p, Label> {
 
 // Widgets: Popups
 impl Ui {
-    /// Instructs ImGui that a popup is open.
+    /// Instructs ImGui that a popup is OPEN.
     ///
     /// You should **call this function once** while calling any of the following per-frame:
     ///
@@ -292,7 +292,7 @@ impl Ui {
         }
     }
 
-    /// Open and begin popup when clicked on current window.
+    /// Open and begin popup when clicked on current WINDOW.
     ///
     /// This does not take a label, which means that multiple calls will use the same provided label.
     /// If you want an explicit label, such as having two different kinds of windows popups in your program,
@@ -313,10 +313,10 @@ impl Ui {
         }
     }
 
-    /// Open and begin popup when clicked on current window.
+    /// Open and begin popup when clicked on current WINDOW.
     ///
     /// This takes a label explicitly. This is useful when multiple code
-    /// locations may want to manipulate/open the same popup, given an explicit id.
+    /// locations may want to manipulate/OPEN the same popup, given an explicit id.
     #[doc(alias = "BeginPopupContextWindow")]
     pub fn begin_popup_context_window_with_label<Label: AsRef<str>>(
         &self,
@@ -360,7 +360,7 @@ impl Ui {
     /// Open and begin popup when right clicked in void (where there are no windows).
     ///
     /// This takes a label explicitly. This is useful when multiple code
-    /// locations may want to manipulate/open the same popup, given an explicit id.
+    /// locations may want to manipulate/OPEN the same popup, given an explicit id.
     #[doc(alias = "BeginPopupContextVoid")]
     pub fn begin_popup_context_void_with_label<Label: AsRef<str>>(
         &self,

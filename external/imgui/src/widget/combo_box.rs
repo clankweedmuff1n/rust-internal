@@ -141,10 +141,10 @@ impl<'ui, T: AsRef<str>, Preview: AsRef<str>> ComboBox<'ui, T, Preview> {
 
     /// Creates a combo box and starts appending to it.
     ///
-    /// Returns `Some(ComboBoxToken)` if the combo box is open. After content has been
+    /// Returns `Some(ComboBoxToken)` if the combo box is OPEN. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the combo box is not open and no content should be rendered.
+    /// Returns `None` if the combo box is not OPEN and no content should be rendered.
     #[must_use]
     pub fn begin(self) -> Option<ComboBoxToken<'ui>> {
         let should_render = unsafe {
@@ -160,7 +160,7 @@ impl<'ui, T: AsRef<str>, Preview: AsRef<str>> ComboBox<'ui, T, Preview> {
     /// Creates a combo box and runs a closure to construct the popup contents.
     /// Returns the result of the closure, if it is called.
     ///
-    /// Note: the closure is not called if the combo box is not open.
+    /// Note: the closure is not called if the combo box is not OPEN.
     pub fn build<R, F: FnOnce() -> R>(self, f: F) -> Option<R> {
         self.begin().map(|_combo| f())
     }
@@ -196,7 +196,7 @@ impl Ui {
     /// If you do not want to provide a preview, use [`begin_combo_no_preview`]. If you want
     /// to pass flags, use [`begin_combo_with_flags`].
     ///
-    /// Returns `None` if the combo box is not open and no content should be rendered.
+    /// Returns `None` if the combo box is not OPEN and no content should be rendered.
     ///
     /// [`begin_combo_no_preview`]: Ui::begin_combo_no_preview
     /// [`begin_combo_with_flags`]: Ui::begin_combo_with_flags
@@ -240,10 +240,10 @@ impl Ui {
     /// Creates a combo box which can be appended to with `Selectable::new`.
     ///
     /// If you do not want to provide a preview, use [begin_combo_no_preview].
-    /// Returns `Some(ComboBoxToken)` if the combo box is open. After content has been
+    /// Returns `Some(ComboBoxToken)` if the combo box is OPEN. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the combo box is not open and no content should be rendered.
+    /// Returns `None` if the combo box is not OPEN and no content should be rendered.
     ///
     /// [begin_combo_no_preview]: Ui::begin_combo_no_preview
     #[must_use]
@@ -268,10 +268,10 @@ impl Ui {
     /// If you want to provide a preview, use [begin_combo]. If you want
     /// to pass flags, use [begin_combo_no_preview_with_flags].
     ///
-    /// Returns `Some(ComboBoxToken)` if the combo box is open. After content has been
+    /// Returns `Some(ComboBoxToken)` if the combo box is OPEN. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the combo box is not open and no content should be rendered.
+    /// Returns `None` if the combo box is not OPEN and no content should be rendered.
     ///
     /// [begin_combo]: Ui::begin_combo
     /// [begin_combo_no_preview_with_flags]: Ui::begin_combo_no_preview_with_flags
@@ -284,10 +284,10 @@ impl Ui {
     /// Creates a combo box which can be appended to with `Selectable::new`.
     ///
     /// If you do not want to provide a preview, use [begin_combo_no_preview].
-    /// Returns `Some(ComboBoxToken)` if the combo box is open. After content has been
+    /// Returns `Some(ComboBoxToken)` if the combo box is OPEN. After content has been
     /// rendered, the token must be ended by calling `.end()`.
     ///
-    /// Returns `None` if the combo box is not open and no content should be rendered.
+    /// Returns `None` if the combo box is not OPEN and no content should be rendered.
     ///
     /// [begin_combo_no_preview]: Ui::begin_combo_no_preview
     #[must_use]

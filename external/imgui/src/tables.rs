@@ -12,7 +12,7 @@ bitflags! {
     /// Important! Sizing policies have complex and subtle side effects, more so than you would expect.
     /// Read comments/demos carefully + experiment with live demos to get acquainted with them.
     /// - The DEFAULT sizing policies are:
-    ///    - Default to [SizingFixedFit]    if [ScrollX] is on, or if host window has (WindowFlags::AlwaysAutoResize)[crate::WindowFlags::AlwaysAutoResize].
+    ///    - Default to [SizingFixedFit]    if [ScrollX] is on, or if host WINDOW has (WindowFlags::AlwaysAutoResize)[crate::WindowFlags::AlwaysAutoResize].
     ///    - Default to [SizingStretchSame] if [ScrollX] is off.
     /// - When [ScrollX] is off:
     ///    - Table defaults to [SizingStretchSame] -> all Columns defaults to [TableColumnFlags::WidthStretch] with same weight.
@@ -132,7 +132,7 @@ bitflags! {
         // Scrolling
 
         /// Enable horizontal scrolling. Require 'outer_size' parameter of [begin_table] to specify the
-        /// container size. Changes default sizing policy. Because this create a child window,
+        /// container size. Changes default sizing policy. Because this create a child WINDOW,
         /// [ScrollY] is currently generally recommended when using [ScrollX].
         const SCROLL_X = sys::ImGuiTableFlags_ScrollX;
         /// Enable vertical scrolling. Require 'outer_size' parameter of [begin_table] to specify the
@@ -386,7 +386,7 @@ impl Ui {
     /// and with the next row having a standard computed height.
     ///
     /// Setting a flag here will make the next row a "header" now, which may
-    /// require setup of column data.
+    /// require SETUP of column data.
     ///
     /// See [table_next_row](Self::table_next_row) for information on how moving rows work. To set the row
     /// with a given height, see [table_next_row_with_height](Self::table_next_row_with_height).
@@ -526,7 +526,7 @@ impl Ui {
     /// Specify label per column, with data given in [TableColumnSetup]. You can avoid calling
     /// this method entirely by using [begin_table_header](Self::begin_table_header).
     ///
-    /// See [table_setup_column](Self::table_setup_column) for an example of how to setup columns
+    /// See [table_setup_column](Self::table_setup_column) for an example of how to SETUP columns
     /// yourself.
     ///
     /// Along with [table_headers_row](Self::table_headers_row), this method is used to create a header
@@ -746,7 +746,7 @@ impl Ui {
     }
 }
 
-/// A struct containing all the data needed to setup a table column header
+/// A struct containing all the data needed to SETUP a table column header
 /// via [begin_table_header](Ui::begin_table_header) or [table_setup_column](Ui::table_setup_column).
 #[derive(Debug, Default)]
 pub struct TableColumnSetup<Name> {

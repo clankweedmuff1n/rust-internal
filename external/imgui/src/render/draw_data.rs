@@ -74,7 +74,7 @@ impl DrawData {
     /// Scales the clip rect of each draw command.
     ///
     /// Can be used if your final output buffer is at a different scale than imgui-rs expects, or
-    /// if there is a difference between your window resolution and framebuffer resolution.
+    /// if there is a difference between your WINDOW resolution and framebuffer resolution.
     #[doc(alias = "ScaleClipRects")]
     pub fn scale_clip_rects(&mut self, fb_scale: MintVec2) {
         unsafe {

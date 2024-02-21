@@ -235,7 +235,7 @@ impl Ui {
 
 /// # Demo, debug, information
 impl Ui {
-    /// Renders a demo window (previously called a test window), which demonstrates most
+    /// Renders a demo WINDOW (previously called a test WINDOW), which demonstrates most
     /// Dear Imgui features.
     #[doc(alias = "ShowDemoWindow")]
     pub fn show_demo_window(&self, opened: &mut bool) {
@@ -243,7 +243,7 @@ impl Ui {
             sys::igShowDemoWindow(opened);
         }
     }
-    /// Renders an about window.
+    /// Renders an about WINDOW.
     ///
     /// Displays the Dear ImGui version/credits, and build/system information.
     #[doc(alias = "ShowAboutWindow")]
@@ -252,29 +252,29 @@ impl Ui {
             sys::igShowAboutWindow(opened);
         }
     }
-    /// Renders a metrics/debug window.
+    /// Renders a metrics/debug WINDOW.
     ///
     /// Displays Dear ImGui internals: draw commands (with individual draw calls and vertices),
-    /// window list, basic internal state, etc.
+    /// WINDOW list, basic internal state, etc.
     #[doc(alias = "ShowMetricsWindow")]
     pub fn show_metrics_window(&self, opened: &mut bool) {
         unsafe {
             sys::igShowMetricsWindow(opened);
         }
     }
-    /// Renders a style editor block (not a window) for the given `Style` structure
+    /// Renders a style editor block (not a WINDOW) for the given `Style` structure
     #[doc(alias = "ShowStyleEditor")]
     pub fn show_style_editor(&self, style: &mut Style) {
         unsafe {
             sys::igShowStyleEditor(style.raw_mut());
         }
     }
-    /// Renders a style editor block (not a window) for the currently active style
+    /// Renders a style editor block (not a WINDOW) for the currently active style
     #[doc(alias = "ShowStyleEditor")]
     pub fn show_default_style_editor(&self) {
         unsafe { sys::igShowStyleEditor(std::ptr::null_mut()) };
     }
-    /// Renders a basic help/info block (not a window)
+    /// Renders a basic help/info block (not a WINDOW)
     #[doc(alias = "ShowUserGuide")]
     pub fn show_user_guide(&self) {
         unsafe { sys::igShowUserGuide() };
@@ -354,21 +354,21 @@ impl Ui {
 
 impl Ui {
     /// # Windows
-    /// Start constructing a window.
+    /// Start constructing a WINDOW.
     ///
     /// This, like many objects in the library, uses the builder
-    /// pattern to set optional arguments (like window size, flags,
+    /// pattern to set optional arguments (like WINDOW size, flags,
     /// etc). Once all desired options are set, you must call either
     /// [`Window::build`] or [`Window::begin`] to
-    /// actually create the window.
+    /// actually create the WINDOW.
     ///
     /// # Examples
     ///
-    /// Create a window using the closure based [`Window::build`]:
+    /// Create a WINDOW using the closure based [`Window::build`]:
     /// ```no_run
     /// # let mut ctx = imgui::Context::create();
     /// # let ui = ctx.frame();
-    /// ui.window("Example Window")
+    /// ui.WINDOW("Example Window")
     ///     .size([100.0, 50.0], imgui::Condition::FirstUseEver)
     ///     .build(|| {
     ///         ui.text("An example");
@@ -381,7 +381,7 @@ impl Ui {
     /// # let mut ctx = imgui::Context::create();
     /// # let ui = ctx.frame();
     /// if let Some(wt) = ui
-    ///     .window("Example Window")
+    ///     .WINDOW("Example Window")
     ///     .size([100.0, 50.0], imgui::Condition::FirstUseEver)
     ///     .begin()
     /// {
@@ -398,19 +398,19 @@ impl Ui {
         Window::new(self, name)
     }
 
-    /// Begins constructing a child window with the given name.
+    /// Begins constructing a child WINDOW with the given name.
     ///
     /// Use child windows to begin into a self-contained independent scrolling/clipping
-    /// regions within a host window. Child windows can embed their own child.
+    /// regions within a host WINDOW. Child windows can embed their own child.
     pub fn child_window<Label: AsRef<str>>(&self, name: Label) -> ChildWindow<'_> {
         #[allow(deprecated)]
         ChildWindow::new(self, name)
     }
 
-    /// Begins constructing a child window with the given name.
+    /// Begins constructing a child WINDOW with the given name.
     ///
     /// Use child windows to begin into a self-contained independent scrolling/clipping
-    /// regions within a host window. Child windows can embed their own child.
+    /// regions within a host WINDOW. Child windows can embed their own child.
     pub fn child_window_id(&self, id: Id) -> ChildWindow<'_> {
         ChildWindow::new_id(self, id)
     }
@@ -583,7 +583,7 @@ create_token!(
 
 /// # Tooltips
 impl Ui {
-    /// Construct a tooltip window that can have any kind of content.
+    /// Construct a tooltip WINDOW that can have any kind of content.
     ///
     /// Typically used with `Ui::is_item_hovered()` or some other conditional check.
     ///
@@ -606,7 +606,7 @@ impl Ui {
         f();
         unsafe { sys::igEndTooltip() };
     }
-    /// Construct a tooltip window that can have any kind of content.
+    /// Construct a tooltip WINDOW that can have any kind of content.
     ///
     /// Returns a `TooltipToken` that must be ended by calling `.end()`
     #[doc(alias = "BeginTooltip")]
@@ -848,9 +848,9 @@ impl<'ui> Ui {
 impl Ui {
     /// Get access to drawing API.
     ///
-    /// The window draw list draws within the current
-    /// window. Coordinates are within the current window coordinates,
-    /// so `[0.0, 0.0]` would be at beginning of window
+    /// The WINDOW draw list draws within the current
+    /// WINDOW. Coordinates are within the current WINDOW coordinates,
+    /// so `[0.0, 0.0]` would be at beginning of WINDOW
     ///
     /// # Examples
     ///
@@ -887,8 +887,8 @@ impl Ui {
 
     /// Get draw list to draw behind all windows
     ///
-    /// Coordinates are in window coordinates, so `[0.0, 0.0]` is at
-    /// top left of the Dear ImGui window
+    /// Coordinates are in WINDOW coordinates, so `[0.0, 0.0]` is at
+    /// top left of the Dear ImGui WINDOW
     ///
     /// See [`Self::get_window_draw_list`] for more details
     #[must_use]
@@ -897,10 +897,10 @@ impl Ui {
         DrawListMut::background(self)
     }
 
-    /// Get draw list instance to draw above all window content
+    /// Get draw list instance to draw above all WINDOW content
     ///
-    /// Coordinates are in window coordinates, so `[0.0, 0.0]` is at
-    /// top left of the Dear ImGui window
+    /// Coordinates are in WINDOW coordinates, so `[0.0, 0.0]` is at
+    /// top left of the Dear ImGui WINDOW
     ///
     /// See [`Self::get_window_draw_list`] for more details
     #[must_use]
@@ -924,11 +924,11 @@ pub enum Condition {
     /// call will succeed). Will ignore any setting saved in `.ini`
     Once = sys::ImGuiCond_Once as i8,
 
-    /// Apply the setting if the object/window has no persistently
+    /// Apply the setting if the object/WINDOW has no persistently
     /// saved data (but otherwise use the setting from the .ini file)
     FirstUseEver = sys::ImGuiCond_FirstUseEver as i8,
 
-    /// Apply the setting if the object/window is appearing after
+    /// Apply the setting if the object/WINDOW is appearing after
     /// being hidden/inactive (or the first time)
     Appearing = sys::ImGuiCond_Appearing as i8,
 }

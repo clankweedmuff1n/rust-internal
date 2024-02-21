@@ -14,9 +14,9 @@ pub struct Style {
     pub alpha: f32,
     /// Additional alpha multiplier applied to disabled elements. Multiplies over current value of [`Style::alpha`].
     pub disabled_alpha: f32,
-    /// Padding within a window
+    /// Padding within a WINDOW
     pub window_padding: [f32; 2],
-    /// Rounding radius of window corners.
+    /// Rounding radius of WINDOW corners.
     ///
     /// Set to 0.0 to have rectangular windows.
     /// Large values tend to lead to a variety of artifacts and are not recommended.
@@ -25,7 +25,7 @@ pub struct Style {
     ///
     /// Generally set to 0.0 or 1.0 (other values are not well tested and cost more CPU/GPU).
     pub window_border_size: f32,
-    /// Minimum window size
+    /// Minimum WINDOW size
     pub window_min_size: [f32; 2],
     /// Alignment for title bar text.
     ///
@@ -35,7 +35,7 @@ pub struct Style {
     ///
     /// Defaults to Direction::Left.
     pub window_menu_button_position: Direction,
-    /// Rounding radius of child window corners.
+    /// Rounding radius of child WINDOW corners.
     ///
     /// Set to 0.0 to have rectangular child windows.
     pub child_rounding: f32,
@@ -43,7 +43,7 @@ pub struct Style {
     ///
     /// Generally set to 0.0 or 1.0 (other values are not well tested and cost more CPU/GPU).
     pub child_border_size: f32,
-    /// Rounding radius of popup window corners.
+    /// Rounding radius of popup WINDOW corners.
     ///
     /// Note that tooltip windows use `window_rounding` instead.
     pub popup_rounding: f32,
@@ -208,7 +208,7 @@ impl IndexMut<StyleColor> for Style {
 /// A color identifier for styling.
 ///
 /// Which color does what can sometimes be be unobvious. A good way to find a particular color is to use
-/// the [`crate::Ui::show_default_style_editor`] window, set a color to a very bright color, and explore the
+/// the [`crate::Ui::show_default_style_editor`] WINDOW, set a color to a very bright color, and explore the
 /// [`crate::Ui::show_demo_window`] until you spot it
 #[repr(u32)]
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
@@ -234,11 +234,11 @@ pub enum StyleColor {
     FrameBgHovered = sys::ImGuiCol_FrameBgHovered,
     /// Same as `FrameBg` but when the mouse is active (e.g mouse is down)
     FrameBgActive = sys::ImGuiCol_FrameBgActive,
-    /// Window title for inactive windows. Also used as the "docked window tab area" when docking is enabled.
+    /// Window title for inactive windows. Also used as the "docked WINDOW tab area" when docking is enabled.
     TitleBg = sys::ImGuiCol_TitleBg,
     /// Window title for active windows.
     TitleBgActive = sys::ImGuiCol_TitleBgActive,
-    /// Color of a floating window when it is "rolled up"
+    /// Color of a floating WINDOW when it is "rolled up"
     TitleBgCollapsed = sys::ImGuiCol_TitleBgCollapsed,
     /// Main menu bar background, see [`crate::Ui::main_menu_bar`]
     MenuBarBg = sys::ImGuiCol_MenuBarBg,
@@ -282,19 +282,19 @@ pub enum StyleColor {
     ResizeGripActive = sys::ImGuiCol_ResizeGripActive,
     /// Inactive tab color. Applies to both tab widgets and docked windows
     Tab = sys::ImGuiCol_Tab,
-    /// Hovered tab (applies regardless if tab is active, or is in the active window)
+    /// Hovered tab (applies regardless if tab is active, or is in the active WINDOW)
     TabHovered = sys::ImGuiCol_TabHovered,
     /// Color of currently selected tab
     TabActive = sys::ImGuiCol_TabActive,
-    /// Non-selected, when in an unfocused window
+    /// Non-selected, when in an unfocused WINDOW
     TabUnfocused = sys::ImGuiCol_TabUnfocused,
-    /// Selected tab, in an unfocused window
+    /// Selected tab, in an unfocused WINDOW
     TabUnfocusedActive = sys::ImGuiCol_TabUnfocusedActive,
 
     /// Color of widget which appears when moving windows around, allowing splitting/etc of dock areas
     #[cfg(feature = "docking")]
     DockingPreview = sys::ImGuiCol_DockingPreview,
-    /// Colour when black area is present in docking setup (e.g while dragging a window away from a split area, leaving it temporarily empty)
+    /// Colour when black area is present in docking SETUP (e.g while dragging a WINDOW away from a split area, leaving it temporarily empty)
     #[cfg(feature = "docking")]
     DockingEmptyBg = sys::ImGuiCol_DockingEmptyBg,
 
@@ -325,11 +325,11 @@ pub enum StyleColor {
     DragDropTarget = sys::ImGuiCol_DragDropTarget,
     /// Gamepad/keyboard: current highlighted item
     NavHighlight = sys::ImGuiCol_NavHighlight,
-    /// Highlight window when using CTRL+TAB
+    /// Highlight WINDOW when using CTRL+TAB
     NavWindowingHighlight = sys::ImGuiCol_NavWindowingHighlight,
-    /// Darken/colorize entire screen behind the CTRL+TAB window list, when active
+    /// Darken/colorize entire screen behind the CTRL+TAB WINDOW list, when active
     NavWindowingDimBg = sys::ImGuiCol_NavWindowingDimBg,
-    /// Darken/colorize entire screen behind a modal window, when one is active
+    /// Darken/colorize entire screen behind a modal WINDOW, when one is active
     ModalWindowDimBg = sys::ImGuiCol_ModalWindowDimBg,
 }
 
@@ -505,21 +505,21 @@ impl std::error::Error for InvalidStyleColorValue {}
 pub enum StyleVar {
     /// Global alpha applies to everything
     Alpha(f32),
-    /// Padding within a window
+    /// Padding within a WINDOW
     WindowPadding([f32; 2]),
-    /// Rounding radius of window corners
+    /// Rounding radius of WINDOW corners
     WindowRounding(f32),
     /// Thickness of border around windows
     WindowBorderSize(f32),
-    /// Minimum window size
+    /// Minimum WINDOW size
     WindowMinSize([f32; 2]),
     /// Alignment for title bar text
     WindowTitleAlign([f32; 2]),
-    /// Rounding radius of child window corners
+    /// Rounding radius of child WINDOW corners
     ChildRounding(f32),
     /// Thickness of border around child windows
     ChildBorderSize(f32),
-    /// Rounding radius of popup window corners
+    /// Rounding radius of popup WINDOW corners
     PopupRounding(f32),
     /// Thickness of border around popup/tooltip windows
     PopupBorderSize(f32),
