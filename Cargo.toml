@@ -1,0 +1,14 @@
+[package]
+name = "internal"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+d3d9-sys = "0.1.0"
+winapi = { version = "0.3", features = ["winuser", "minwindef", "libloaderapi", "processthreadsapi", "handleapi", "winnt", "minwinbase"] }
+imgui = { version = "0.11.0", path = "./external/imgui" }
+imgui-sys = { version = "0.11.0-pre", path = "./external/imgui-sys" }
